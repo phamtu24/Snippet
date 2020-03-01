@@ -1,0 +1,152 @@
+{
+	"create saga action": {
+		"prefix": "sagaAct",
+		"body": [
+			"export const ${1:ACTION_NAME} = '${3:app}/${2:actionName}';",
+			"export const ${1:ACTION_NAME}_SUCCESS = '${3:app}/${2:actionName}Succes';",
+			"export const ${1:ACTION_NAME}_FAIL = '${3:app}/${2:actionName}Fail';"
+		],
+		"description": "create saga action"
+	},
+	"create redux action": {
+		"prefix": "reduxAct",
+		"body": [
+			"export const ${1:ACTION_NAME} = '${2:app}/${3:actionName}'"
+		],
+		"description": "create redux action"
+	},
+	"declare redux action in index.js": {
+		"prefix": "reduxActCrt",
+		"body": [
+			"export const ${1:actionName} = (${2:payload}) => ({",
+			"    type: ${3:ACTION_NAME},",
+			"    payload: ${2:payload}",
+			"})"
+		],
+		"description": "declare redux action in index.js"
+	},
+	"create redux reducer": {
+		"prefix": "reduxRdc",
+		"body": [
+			"import { ${1:ACTION_NAME} } from \"../actions/type\";",
+			"",
+			"const initialState = {",
+			"    data: {},",
+			"    isLoading: true,",
+			"    error: null",
+			"};",
+			"",
+			"export default function (state = initialState, action) {",
+			"    switch (action.type) {",
+			"        case ${1:ACTION_NAME}:",
+			"            return {",
+			"                ...state,",
+			"                data: action.payload.type",
+			"            }",
+			"",
+			"        default:",
+			"            return state;",
+			"    }",
+			"    ",
+			"}",
+			""
+		],
+		"description": "create redux reducer"
+	},
+	"create saga reducer": {
+		"prefix": "sagaRdc",
+		"body": [
+			"import { ",
+			"  ${1:ACTION_NAME}, ",
+			"  ${1:ACTION_NAME}_SUCCESS, ",
+			"  ${1:ACTION_NAME}_FAIL",
+			"} from \"../actions/type\";",
+			"",
+			"const initialState = {",
+			"  data: {},",
+			"  isLoading: true,",
+			"  error: null",
+			"};",
+			"",
+			"export default function(state = initialState, action) {",
+			"  switch (action.type) {",
+			"    case ${1:ACTION_NAME}: {",
+			"      return { ...state, isLoading: true };",
+			"    }",
+			"    case ${1:ACTION_NAME}_SUCCESS: {",
+			"      return {",
+			"        ...state,",
+			"        isLoading: false,",
+			"        error: null,",
+			"        data: action.payload",
+			"      };",
+			"    }",
+			"    case ${1:ACTION_NAME}_FAIL: {",
+			"     ",
+			"      return {",
+			"        ...state,",
+			"        error: action.payload,",
+			"        isLoading: false,",
+			"      };",
+			"    }",
+			"    default:",
+			"      return state;",
+			"  }",
+			"}",
+			""
+		],
+		"description": "create redux reducer"
+	},
+	"declare saga function in NetworkSaga": {
+		"prefix": "sagaCrt",
+		"body": [
+			"export function* ${1:actionName}(action) {",
+			"    try {",
+			"        const response = yield call(API.${1:apiFunction}, action.payload)",
+			"        yield put({",
+			"            type: ${2:ACTION_NAME}_SUCCESS, ",
+			"            payload: {response}",
+			"        })",
+			"    } catch (error) {",
+			"        yield put({ ",
+			"            type: ${2:ACTION_NAME}_FAIL, ",
+			"            payload: error })",
+			"    }",
+			"}"
+		],
+		"description": "declare saga function in NetworkSaga"
+	},
+	"declare api POST function in Api.js": {
+		"prefix": "apiPostCrt",
+		"body": [
+			"export const ${1:functionName} = (payload) => {",
+			"  return handleResult(getAxios.post(`${2:api_route}`, payload))",
+			"}"
+		],
+		"description": "declare api function in Api.js"
+	},
+	"declare api GET function in Api.js": {
+		"prefix": "apiGetCrt",
+		"body": [
+			"export const ${1:actionName} = () => {",
+			"  return handleResult(getAxios.get(`${2:api_route}`))",
+			"}"
+		],
+		"description": "declare api GET function in Api.js"
+	},
+	"create redux connect ": {
+		"prefix": "reduxConnect",
+		"body": [
+		  "const mapStateToProps = (state) => ({",
+		  "",
+		  "})",
+		  "",
+		  "const mapDispatchToProps = {",
+		  "",
+		  "}",
+		  "",
+		  "export default connect(mapStateToProps, mapDispatchToProps)(${1:ScreenName})"
+		],
+		"description": "create redux connect "
+	  }
+}

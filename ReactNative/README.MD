@@ -8,7 +8,8 @@
 * Copy tất cả trong file snippet.json và dán vào file javascript.json vừa hiện ra
 * Save file và sử dụng
 
-2. **Cách dùng trong từng file**
+2. **Cách dùng trong từng file**  
+
 Để dùng snippet, gõ theo các prefix dưới đây, chờ Vscode gợi ý rồi nhấn Enter. 
 Khai báo từng thành phần cần thiết, nhấn Tab để chuyển qua thành phần tiếp theo cần khai báo 
 
